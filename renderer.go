@@ -22,12 +22,14 @@ func (r renderer) Render(d *messages.GherkinDocument) string {
 }
 
 func (r renderer) renderFeature(f *messages.Feature) {
-	r.writeLine("---")
-	r.writeLine("tags:")
-	for _, t := range f.Tags {
-		r.writeLine("- " + t.Name[1:])
-	}
-	r.writeLine("---")
+    if len(f.Tags) != 0 {
+        r.writeLine("---")
+        r.writeLine("tags:")
+        for _, t := range f.Tags {
+            r.writeLine("- " + t.Name[1:])
+        }
+        r.writeLine("---")
+    }
 	r.writeLine("# " + f.Name)
 	r.writeDescription(f.Description)
 
